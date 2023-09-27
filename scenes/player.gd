@@ -2,20 +2,26 @@ extends CharacterBody2D
 
 var pos = Vector2.ZERO
 var target = position
-var rotation_speed = 5
 var angle_to_player
 var move_vector
 
 var camera
 var speed_crash_minimum = 200
-var speed = 300
+var max_speed = 150
+var speed = max_speed
+var rotation_speed = max_speed / speed + 1
 var altitude = 10
 var scaling
+var rocket_scene = preload("res://scenes/rocket.tscn")
+var acceleration = 3
+var shoot_point
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pos = Vector2(100,200)
 	position = pos
+	shoot_point = $Marker2D
 	#$Camera2D.current = true
 	#camera.current = true
 
@@ -26,7 +32,7 @@ func _input(event):
 
 func _altitude(delta, speed):
 	if speed < speed_crash_minimum:
-		altitude -=  (101 - speed) * delta / 10
+		altitude -=  (75 - speed) * delta / 10
 		if altitude <= 1:
 			queue_free()
 	else:
@@ -34,16 +40,25 @@ func _altitude(delta, speed):
 	
 	altitude = clamp(altitude, 1, 10)
 	print(altitude)
-	
+
+
+func _shoot():
+	var rocket = rocket_scene.instantiate()
+	rocket.position = shoot_point.position
+	get_tree().get_root().add_child(rocket)
+
+
 func _process(delta):
 	_altitude(delta, speed)
+	rotation_speed = max_speed / speed + 1
+	print(rotation_speed)
 	#print(rotation)
 	#camera.rotation = rotation
 	#move_vector = position.direction_to(target).normalized()
 	if Input.is_action_pressed("increase_speed"):
-		speed += 5
+		speed += acceleration
 	if Input.is_action_pressed("decrease_speed"):
-		speed -= 5
+		speed -= acceleration
 	scaling = (altitude) / 10
 	
 	scale.x = scaling
@@ -74,4 +89,5 @@ func _process(delta):
 #	pos.x += speed * delta
 #	position = pos
 	
-	#print(Input.is_action_pressed("shoot"))
+	if Input.is_action_pressed("shoot"):
+		_shoot()

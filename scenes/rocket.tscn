@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c87p0s03ev3v2"]
+
+[ext_resource type="Script" path="res://scenes/rocket.gd" id="1_c5t8b"]
+[ext_resource type="Texture2D" uid="uid://clnn4cwtapq5r" path="res://graphics/Effects/player_rocket.png" id="1_oi8fe"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xo62o"]
+radius = 3.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a8qeq"]
+radius = 103.238
+
+[node name="rocket" type="RigidBody2D"]
+script = ExtResource("1_c5t8b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oi8fe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xo62o")
+
+[node name="Detect_box" type="CollisionShape2D" parent="."]
+light_mask = 2
+visibility_layer = 2
+shape = SubResource("CircleShape2D_a8qeq")
