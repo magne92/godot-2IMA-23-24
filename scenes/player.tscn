@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ct326817qt8a"]
+
+[ext_resource type="Texture2D" uid="uid://8ph56w2su7qv" path="res://graphics/Planes/player_planes.png" id="1_7t1ue"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_vq1gn"]
+[ext_resource type="Texture2D" uid="uid://clnn4cwtapq5r" path="res://graphics/Effects/player_rocket.png" id="2_1rfkn"]
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_vq1gn")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_7t1ue")
+hframes = 6
+vframes = 3
+
+[node name="laser" type="Sprite2D" parent="PlayerSprite"]
+position = Vector2(0, -27)
+texture = ExtResource("2_1rfkn")
+
+[node name="Camera2D" type="Camera2D" parent="."]

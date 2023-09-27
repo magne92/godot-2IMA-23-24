@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7lh30ylr53w3"]
+
+[ext_resource type="Texture2D" uid="uid://cnl0sgj65ibfv" path="res://graphics/tileset.png" id="1_x2mih"]
+
+[node name="home_base" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x2mih")
+region_enabled = true
+region_rect = Rect2(127.89, 47.7021, 48.3768, 31.8908)
