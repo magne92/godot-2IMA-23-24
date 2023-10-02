@@ -9,6 +9,9 @@ radius = 7.0
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_vq1gn")
 
+[node name="Shoot_CD" type="Timer" parent="."]
+one_shot = true
+
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.5, 0.5)
@@ -23,4 +26,6 @@ zoom = Vector2(2, 2)
 shape = SubResource("CircleShape2D_kdalr")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(10, 0)
+position = Vector2(24, 0)
+
+[connection signal="timeout" from="Shoot_CD" to="." method="_on_shoot_cd_timeout"]

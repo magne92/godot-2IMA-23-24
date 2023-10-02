@@ -10,16 +10,19 @@ height = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_a8qeq"]
 radius = 103.238
 
-[node name="rocket" type="RigidBody2D"]
+[node name="rocket" type="CharacterBody2D"]
 script = ExtResource("1_c5t8b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
 texture = ExtResource("1_oi8fe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_xo62o")
 
 [node name="Detect_box" type="CollisionShape2D" parent="."]
 light_mask = 2
 visibility_layer = 2
 shape = SubResource("CircleShape2D_a8qeq")
+disabled = true

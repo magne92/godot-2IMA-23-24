@@ -1,11 +1,20 @@
-extends RigidBody2D
+extends CharacterBody2D
 
+var speed = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _physics_process(delta):
+	velocity = Vector2(1, 0).rotated(rotation) * speed
+	move_and_collide(velocity * delta)
+
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		print("I collided with ", collision.get_collider().name)
+		queue_free()
+	
+
+

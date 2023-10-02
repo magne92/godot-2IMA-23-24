@@ -21,7 +21,6 @@ var shoot_point
 func _ready():
 	pos = Vector2(100,200)
 	position = pos
-	shoot_point = $Marker2D
 	#$Camera2D.current = true
 	#camera.current = true
 
@@ -33,25 +32,28 @@ func _input(event):
 func _altitude(delta, speed):
 	if speed < speed_crash_minimum:
 		altitude -=  (75 - speed) * delta / 10
-		if altitude <= 1:
+		if altitude <= 3:
 			queue_free()
 	else:
 		altitude += 1 * delta
 	
 	altitude = clamp(altitude, 1, 10)
-	print(altitude)
+	#print(altitude)
 
 
-func _shoot():
+func shoot():
+	$Shoot_CD.start()
 	var rocket = rocket_scene.instantiate()
-	rocket.position = shoot_point.position
-	get_tree().get_root().add_child(rocket)
+	rocket.position = $Marker2D.global_position
+	rocket.rotation = rotation
+	rocket.velocity = velocity
+	get_parent().add_child(rocket)
 
 
 func _process(delta):
 	_altitude(delta, speed)
 	rotation_speed = max_speed / speed + 1
-	print(rotation_speed)
+	#print(rotation_speed)
 	#print(rotation)
 	#camera.rotation = rotation
 	#move_vector = position.direction_to(target).normalized()
@@ -59,35 +61,40 @@ func _process(delta):
 		speed += acceleration
 	if Input.is_action_pressed("decrease_speed"):
 		speed -= acceleration
+		
 	scaling = (altitude) / 10
-	
 	scale.x = scaling
 	scale.y = scaling
-		
 	speed = clamp(speed,0,200)
-	print(speed)
+	#print(speed)
 	
 	if Input.is_action_pressed("turn_right"):
 		rotation += rotation_speed * delta
 	if Input.is_action_pressed("turn_left"):
 		rotation += -rotation_speed * delta
+
+	velocity = Vector2(1, 0).rotated(rotation) * speed
+	move_and_slide()
+	
+	
+	
+	if Input.is_action_pressed("shoot") and $Shoot_CD.is_stopped():
+		shoot()
+	
 		
 	#velocity.x += move_vector.x.rotated(rotation) * speed * delta
 	#velocity.y += move_vector.y.rotated(rotation) * speed * delta
-
-	velocity = Vector2(1, 0).rotated(rotation) * speed
 	#look_at(target)
 	#angle_to_player = global_position.direction_to(target).angle()
 	# slowly changes the rotation to face the angle
 	#rotation = move_toward(rotation, angle_to_player, delta)
-	move_and_slide()
-	
 #	if position.distance_to(target) > 10:
 #		move_and_slide()
 #		pass
 	
 #	pos.x += speed * delta
 #	position = pos
-	
-	if Input.is_action_pressed("shoot"):
-		_shoot()
+
+
+func _on_shoot_cd_timeout():
+	print("timer timeout")
