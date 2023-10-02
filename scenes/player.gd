@@ -77,7 +77,6 @@ func _process(delta):
 	move_and_slide()
 	
 	
-	
 	if Input.is_action_pressed("shoot") and $Shoot_CD.is_stopped():
 		shoot()
 	
@@ -94,7 +93,6 @@ func _process(delta):
 	
 #	pos.x += speed * delta
 #	position = pos
-
 
 func _on_shoot_cd_timeout():
 	print("timer timeout")

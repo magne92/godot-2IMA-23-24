@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://clnn4cwtapq5r" path="res://graphics/Effects/player_rocket.png" id="1_oi8fe"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xo62o"]
-radius = 3.0
-height = 14.0
+radius = 6.0
+height = 18.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a8qeq"]
 radius = 103.238
@@ -17,7 +17,8 @@ script = ExtResource("1_c5t8b")
 rotation = 1.5708
 texture = ExtResource("1_oi8fe")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["rockets"]]
+visibility_layer = 2
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_xo62o")
 
