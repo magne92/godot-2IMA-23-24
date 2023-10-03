@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6hcdna55ia47"]
+[gd_scene load_steps=9 format=3 uid="uid://c6hcdna55ia47"]
 
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_bafca"]
 [ext_resource type="PackedScene" uid="uid://ct326817qt8a" path="res://scenes/player.tscn" id="2_cwbj8"]
 [ext_resource type="Texture2D" uid="uid://cnl0sgj65ibfv" path="res://graphics/tileset.png" id="4_53ka6"]
 [ext_resource type="PackedScene" uid="uid://y8ovpcvk2u4o" path="res://scenes/enemy.tscn" id="4_av4xb"]
+[ext_resource type="PackedScene" uid="uid://c7lh30ylr53w3" path="res://scenes/home_base.tscn" id="5_gvrft"]
+[ext_resource type="PackedScene" uid="uid://cv310vcmw34gb" path="res://scenes/explosion.tscn" id="6_6skw3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lfche"]
 texture = ExtResource("4_53ka6")
@@ -579,3 +581,11 @@ position = Vector2(393, 162)
 position = Vector2(450, 158)
 
 [node name="Enemy_spawn" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="home_base" parent="." instance=ExtResource("5_gvrft")]
+position = Vector2(364, 144)
+
+[node name="explosion" parent="." instance=ExtResource("6_6skw3")]
+position = Vector2(196, 167)

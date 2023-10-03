@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_kdalr"]
 radius = 7.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_vq1gn")
 
 [node name="Shoot_CD" type="Timer" parent="."]

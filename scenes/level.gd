@@ -11,6 +11,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print($Enemy_spawn.is_stopped())
 	if $Enemy_spawn.is_stopped():
 		var enemy = enemy_scene.instantiate()
 		$TileMap.add_child(enemy)

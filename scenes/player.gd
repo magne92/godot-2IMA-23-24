@@ -7,7 +7,7 @@ var move_vector
 
 var camera
 var speed_crash_minimum = 200
-var max_speed = 150
+var max_speed = 200
 var speed = max_speed
 var rotation_speed = max_speed / speed + 1
 var altitude = 10
@@ -29,7 +29,7 @@ func _input(event):
 	target = get_global_mouse_position()
 		
 
-func _altitude(delta, speed):
+func set_altitude(delta, speed):
 	if speed < speed_crash_minimum:
 		altitude -=  (75 - speed) * delta / 10
 		if altitude <= 3:
@@ -51,9 +51,10 @@ func shoot():
 
 
 func _process(delta):
-	_altitude(delta, speed)
-	rotation_speed = max_speed / speed + 1
-	#print(rotation_speed)
+	set_altitude(delta, speed)
+	rotation_speed = max_speed  / (speed + 1)
+	rotation_speed = clamp(rotation_speed,1,10)
+	print(rotation_speed)
 	#print(rotation)
 	#camera.rotation = rotation
 	#move_vector = position.direction_to(target).normalized()

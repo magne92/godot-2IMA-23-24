@@ -1,7 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://c87p0s03ev3v2"]
+[gd_scene load_steps=9 format=3 uid="uid://c87p0s03ev3v2"]
 
 [ext_resource type="Script" path="res://scenes/rocket.gd" id="1_c5t8b"]
 [ext_resource type="Texture2D" uid="uid://clnn4cwtapq5r" path="res://graphics/Effects/player_rocket.png" id="1_oi8fe"]
+[ext_resource type="Texture2D" uid="uid://couqtlmfvxekg" path="res://graphics/Effects/rocket_and_plane_fire.png" id="3_gcxke"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inj2o"]
+atlas = ExtResource("3_gcxke")
+region = Rect2(0, 0, 8, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thlrf"]
+atlas = ExtResource("3_gcxke")
+region = Rect2(8, 0, 8, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ji3uw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inj2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thlrf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xo62o"]
 radius = 6.0
@@ -16,6 +39,11 @@ script = ExtResource("1_c5t8b")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("1_oi8fe")
+
+[node name="fire" type="AnimatedSprite2D" parent="Sprite2D"]
+position = Vector2(4.34399e-05, 12)
+sprite_frames = SubResource("SpriteFrames_ji3uw")
+frame_progress = 0.950708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["rockets"]]
 visibility_layer = 2
