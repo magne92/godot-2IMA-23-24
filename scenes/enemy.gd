@@ -12,7 +12,7 @@ var rng = RandomNumberGenerator.new()
 
 
 func _ready():
-	var x = rng.randf_range(200.0, 300.0)
+	var x = rng.randf_range(200.0, 1000.0)
 	var y = rng.randf_range(200.0, 300.0)
 	position = Vector2(x,y)
 
